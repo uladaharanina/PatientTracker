@@ -1,17 +1,29 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace patientTracker.Models;
 
 public class User{
 
 [Key]
-public int userId {get;set;}
-public string username {get;set;}
-public string password {get;set;}
-public int role_id {get;set;}  
-public DateTime dateCreated {get;set;}
+[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+public int UserId {get;set;}
+[Required(ErrorMessage ="Username is required")]
+public string Username {get;set;}
+[Required(ErrorMessage ="Password is required")]
+public string Password {get;set;}
+
+
+[Required]
+[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+public DateTime DateCreated {get;set;} = DateTime.UtcNow;
 
 // Navigation property
+[Required]
+public int RoleId { get; set; }
+
+[ForeignKey("RoleId")]
+public Role Role {get;set;}  
 public ICollection<Patient> Patients { get; set; }
 public ICollection<Doctor> Doctors { get; set; }
  

@@ -11,7 +11,6 @@ public class Patient{
     [Required(ErrorMessage = "Patient's name is required")]
     public  string FullName {get;set;}
     public int Age {get;set;}
-
     public string Address {get;set;}
     public int Height {get;set;}
     public int Weight {get;set;}
@@ -20,7 +19,8 @@ public class Patient{
     public string Diagnosis {get;set;}
     [Required(ErrorMessage = "Patient's prmary care doctor's is required")]
 
-    public int PrimaryDoctor {get;set;}
+    [ForeignKey("DoctorId")]
+    public Doctor Doctors {get;set;}
 
     [ForeignKey("UserId")]
     public User User {get;set;}
