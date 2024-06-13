@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace patientTracker.Models;
 
-public class Procedur{
+public class Procedure{
 
     [Key]
     public  string ProcedureCode  {get;set;}

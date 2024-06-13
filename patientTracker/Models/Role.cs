@@ -1,8 +1,8 @@
 namespace patientTracker.Models;
 
-public class Roles{
+public class Role{
     public int RoleId {get;set;}
     public string RoleName {get;set;}
-    public string AccessLevel {get;set;}
+    public int AccessLevel {get;set;}
     
 }
