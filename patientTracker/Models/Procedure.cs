@@ -8,8 +8,8 @@ public class Procedure{
     public  string ProcedureCode  {get;set;}
 
     [Required(ErrorMessage = "Procedure's name is required")]
-    public string ProcedureName  {get;set;}
-    public string ProcedureDescription  {get;set;}
+    public string? ProcedureName  {get;set;}
+    public string? ProcedureDescription  {get;set;}
 
 
 }

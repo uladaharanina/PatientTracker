@@ -8,6 +8,9 @@ namespace patientTracker.Data;
 
 public class PatientTrackerContext : DbContext{
 
+    public PatientTrackerContext(DbContextOptions<PatientTrackerContext> options) : base(options)
+    {}
+
     public DbSet<User> Users {get;set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {   
@@ -16,7 +19,6 @@ public class PatientTrackerContext : DbContext{
                                     .ValueGeneratedOnAdd()
                                     .HasDefaultValueSql("NEXT VALUE FOR userIdIncrement");
             
-
         // Add initial roles 
 
         modelBuilder.Entity<Role>().HasData(
@@ -26,13 +28,27 @@ public class PatientTrackerContext : DbContext{
         );
 
         modelBuilder.Entity<User>().HasData(
-            new User{UserId = 1000, 
+            new User{   UserId = 1000, 
                         Username = "administrator", 
                         Password = "administrator24!", 
-                        RoleId = 3
-            }
+                        RoleId = 3,
 
-        );
+        });
+
+        modelBuilder.Entity<Patient>()
+        .HasOne(p => p.Users)
+        .WithMany()
+        .HasForeignKey(p => p.UserId)
+        .OnDelete(DeleteBehavior.Restrict); // Cascading delete behavior
+
+    // Configure relationship between User and Doctor
+    modelBuilder.Entity<Doctor>()
+        .HasOne(d => d.Users)
+        .WithMany()
+        .HasForeignKey(d => d.UserId)
+        .OnDelete(DeleteBehavior.Restrict); // Cascading delete behavior
+        
+
     }
     public DbSet<Doctor> Doctors {get;set;}
     public DbSet<Patient> Patients {get;set;}
