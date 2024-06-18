@@ -13,18 +13,12 @@ public string Username {get;set;}
 [Required(ErrorMessage ="Password is required")]
 public string Password {get;set;}
 
+public int RoleId {get;set;}
+
 
 [Required]
 [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 public DateTime DateCreated {get;set;} = DateTime.UtcNow;
 
-// Navigation property
-[Required]
-public int RoleId { get; set; }
 
-[ForeignKey("RoleId")]
-public Role Role {get;set;}  
-public ICollection<Patient> Patients { get; set; }
-public ICollection<Doctor> Doctors { get; set; }
- 
 }

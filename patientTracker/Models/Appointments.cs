@@ -12,23 +12,13 @@ public class Appointments{
     public DateTime ScheduleTime {get;set;}
 
     [Required(ErrorMessage = "Doctor's ID is required")]
-    public string DoctorId {get;set;}
+    public int DoctorId {get;set;}
 
     [Required(ErrorMessage = "Patient's ID is required")]
     public string PatientId {get;set;}
     [Required(ErrorMessage = "Procedure's code is required")]
     public string ProcedureCode {get;set;}
 
-
-    //Relationships
-    [ForeignKey("ProcedureCode")]
-    public Procedure Procedure {get;set;}
-
-    [ForeignKey("PatientId")]
-    public Patient Patients {get;set;}
-
-    [ForeignKey("DoctorId")]
-    public Doctor Doctor {get;set;}
 
 
 }

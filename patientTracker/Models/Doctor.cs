@@ -6,11 +6,12 @@ namespace patientTracker.Models;
 public class Doctor{
 
     [Key]
-    public int DoctorId {get;set;}
-    [Required]
-    public int UserId {get;set;}
+    public int UserId  {get;set;}
 
+    [Required]
     public string fullName{get;set;}
+    [Required]
+
     public string specialization{get;set;}
     public string education{get;set;}
 
@@ -19,11 +20,11 @@ public class Doctor{
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime hireDate {get;set;} = DateTime.UtcNow;
 
+    public ICollection<Patient> Patients {get;set;}
 
-    //Relationships
     [ForeignKey("UserId")]
-    public User User {get;set;}
-    public List<Patient> Patients {get;set;}
+    public User Users {get;set;}
+
 
 }
 
