@@ -15,10 +15,10 @@ public interface IUserRepo{
     public Task<User> GetUserById(int id);
 
     //Authenticate user
-    public bool AuthenticateUser(User user);
+    public Task<bool> AuthenticateUser(string username, string password);
 
     //Update user password
-    public Task<User> UpdateUserPassword(User user);
+    public Task<User> UpdateUserPassword(int userId, string newPassword);
 
     //Delete user
     public void DeleteUser(User user);

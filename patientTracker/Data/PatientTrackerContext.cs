@@ -11,7 +11,6 @@ public class PatientTrackerContext : DbContext{
     public PatientTrackerContext(DbContextOptions<PatientTrackerContext> options) : base(options)
     {}
 
-    public DbSet<User> Users {get;set;}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {   
         //Configure sequence of how userId should be generated (created a sequence in the db)
@@ -50,6 +49,8 @@ public class PatientTrackerContext : DbContext{
         
 
     }
+    public DbSet<User> Users {get;set;}
+
     public DbSet<Doctor> Doctors {get;set;}
     public DbSet<Patient> Patients {get;set;}
     public DbSet<Role> Roles {get;set;}
