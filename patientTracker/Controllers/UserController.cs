@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+using patientTracker.DTO;
 using patientTracker.Models;
 using patientTracker.Services;
 
@@ -18,17 +19,24 @@ public class UserController : Controller{
     */
     [HttpGet]
     public async Task<IActionResult>  GetAllUsers(){
-        IEnumerable<User> allUsers =  await _userService.GetAll();
+        IEnumerable<UserDTO> allUsers =  await _userService.GetAll();
         return Ok(allUsers);
     }
+
+    /*
+        CREATE A USER
+    */
+    [HttpPost]
+    public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createdUserDTO){
+        UserDTO user = await _userService.CreateUser(createdUserDTO);
+        return Ok("Created User: " + user.Username);
+    }
+
 
     /*
         UPDATE USER PASSWORD
     */
 
-    /*
-        CREATE A USER
-    */
 
     /*
         DELETE USER
