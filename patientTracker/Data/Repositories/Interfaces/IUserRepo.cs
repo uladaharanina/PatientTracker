@@ -15,7 +15,7 @@ public interface IUserRepo{
     public Task<User> GetUserById(int id);
 
     //Authenticate user
-    public Task<bool> AuthenticateUser(string username, string password);
+    public Task<User> AuthenticateUser(string username, string password);
 
     //Update user password
     public Task<User> UpdateUserPassword(int userId, string newPassword);

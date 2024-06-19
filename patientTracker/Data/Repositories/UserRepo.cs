@@ -6,6 +6,10 @@ public class UserRepo : IUserRepo{
 
     public readonly PatientTrackerContext _context;
 
+    public UserRepo(PatientTrackerContext context){
+        _context = context;
+    }
+
  //Get all users
     public async Task<List<User>> GetAllUsers(){
         return await _context.Users.ToListAsync();
@@ -24,13 +28,13 @@ public class UserRepo : IUserRepo{
     }
 
     //Authenticate user
-    public async Task<bool> AuthenticateUser(string username, string password){
+    public async Task<User> AuthenticateUser(string username, string password){
 
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password ==  password);
         if(user!= null){
-            return true;
+            return user;
         }
-            return false;
+            return null;
     }
 
     //Update user password

@@ -1,17 +1,24 @@
 
 using patientTracker.Models;
+using patientTracker.Data.Repositories;
 
 namespace patientTracker.Services;
 
 public class UserService : IUserService
 {
-    public Task<User> Authenticate(string username, string password)
+    public IUserRepo _userRepo;
+
+    public UserService(IUserRepo userRepo)
     {
-        throw new NotImplementedException();
+        _userRepo = userRepo;
+    }
+    public async Task<User> Authenticate(string username, string password)
+    {
+       return await _userRepo.AuthenticateUser(username, password);
     }
 
-    public Task<IEnumerable<User>> GetAll()
+    public async Task<IEnumerable<User>> GetAll()
     {
-        throw new NotImplementedException();
+        return await _userRepo.GetAllUsers();
     }
 }
