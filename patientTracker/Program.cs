@@ -8,8 +8,8 @@ var connectionString = builder.Configuration["ConnectionString"];
 builder.Services.AddDbContext<PatientTrackerContext>(options =>
     options.UseSqlServer(connectionString));
 
-var app = builder.Build();
 
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 //Add dependencyes
@@ -19,7 +19,12 @@ builder.Services.AddScoped<IUserRepo, UserRepo>();
 
 
 //Add swagger
-
+var app = builder.Build();
 app.MapControllers();
+  if (app.Environment.IsDevelopment())
+  {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+  }
 
 app.Run();
