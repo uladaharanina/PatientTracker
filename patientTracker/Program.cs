@@ -16,7 +16,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
-
+builder.Services.AddScoped<IValidatinService, ValidateService>();
+builder.Services.AddScoped<IHashingService, HashingService>();
 
 //Add swagger
 var app = builder.Build();
