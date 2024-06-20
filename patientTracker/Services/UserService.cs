@@ -8,31 +8,48 @@ namespace patientTracker.Services;
 public class UserService : IUserService
 {
     public IUserRepo _userRepo;
+    public IHashingService _hashingService;
 
-    public UserService(IUserRepo userRepo)
+    public IValidatinService _validationService;
+
+    public UserService(IUserRepo userRepo, IHashingService hashingService, IValidatinService validationService)
     {
         _userRepo = userRepo;
+        _hashingService = hashingService;
+        _validationService = validationService;
     }
+
+    // Authenticate User
     public async Task<User> Authenticate(string username, string password)
     {
        return await _userRepo.AuthenticateUser(username, password);
     }
 
+    //Create User
      public async Task<UserDTO> CreateUser(CreateUserDTO userDTO){
-        //Validate Password and username
-        var user = new User{
+        //IMPLEMENT VALIDAION HERE
+        if(_validationService.isCorrectPassword(userDTO.Password) && _validationService.isCorrectUsername(userDTO.Username))
+        {
+             var user = new User{
             Username = userDTO.Username,
-            Password =  userDTO.Password,
+            Password =  _hashingService.HashPassword(userDTO.Password),
             RoleId = userDTO.RoleId,
              DateCreated = DateTime.UtcNow
         };
         User newUser = await _userRepo.CreateUser(user);
+    
         return new UserDTO{
             Username = newUser.Username,
             RoleId = newUser.RoleId
         }; 
+        }
+        else{
+            return null;
+        }
+       
      }
 
+    //List all users
 
     public async Task<IEnumerable<UserDTO>> GetAll()
     {   
@@ -42,6 +59,29 @@ public class UserService : IUserService
             RoleId = u.RoleId
         });
     }
+
+    //Update User Password
+    public async Task<UserDTO> UpdateUserPassword(int userId, string newPassword){
+
+        //Get user by id
+        User selectedUser = await _userRepo.GetUserById(userId);
+
+        if(selectedUser!= null && _validationService.isCorrectPassword(newPassword)){
+             string hashed_psw = _hashingService.HashPassword(newPassword);
+             selectedUser.Password =  hashed_psw;
+             await _userRepo.UpdateUser(selectedUser);
+
+              return new UserDTO{
+                Username = selectedUser.Username,
+                RoleId = selectedUser.RoleId
+            };
+        }
+        else{
+            throw new Exception("User does not exist or new password is not valid");
+        }
+
+    }
+
 
     
 }

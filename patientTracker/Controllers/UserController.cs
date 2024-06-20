@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration.UserSecrets;
 using patientTracker.DTO;
 using patientTracker.Models;
 using patientTracker.Services;
@@ -36,6 +37,24 @@ public class UserController : Controller{
     /*
         UPDATE USER PASSWORD
     */
+    [HttpPatch]
+    [Route("UpdatePassword")]
+    public async Task<IActionResult> UpdateUserPassword(int userId, string newPassword){
+
+        try{
+              UserDTO user = await _userService.UpdateUserPassword(userId, newPassword);
+            if(user != null){
+                return Ok("Password updated for: " + user.Username);
+            }
+            else{
+                return NotFound("User does not exist");
+            }
+        }
+        catch(Exception ex){
+            return BadRequest(ex.Message);
+        }
+      
+    }
 
 
     /*

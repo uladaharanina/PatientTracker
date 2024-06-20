@@ -23,8 +23,8 @@ public class UserRepo : IUserRepo{
     }
 
     //Get user by id
-    public async Task<User> GetUserById(int id){
-        return await _context.Users.FirstOrDefaultAsync(u => u.UserId == id);
+    public async Task<User?> GetUserById(int id){
+        return await _context.Users.FindAsync(id);
     }
 
     //Authenticate user
@@ -38,15 +38,17 @@ public class UserRepo : IUserRepo{
     }
 
     //Update user password
-    public async Task<User> UpdateUserPassword(int userId, string newPassword){
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.UserId == userId);
-        if(user != null ){
-            user.Password =  newPassword;
-            await _context.SaveChangesAsync();
-            return user;
+    public async Task<User> UpdateUser(User user){
+       User selectedUser = await _context.Users.FindAsync(user.UserId);
 
-        }
-        return null;
+       selectedUser.Username = user.Username;
+       selectedUser.Password =  user.Password;
+       selectedUser.RoleId = user.RoleId;
+
+        _context.Users.Update(selectedUser);
+        await _context.SaveChangesAsync();
+
+       return selectedUser;
     }
 
     //Delete user
