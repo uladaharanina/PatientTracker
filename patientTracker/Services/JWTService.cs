@@ -30,4 +30,18 @@ public class JWTService{
         var securityToken = new JwtSecurityToken(headers, payload);
         return new JwtSecurityTokenHandler().WriteToken(securityToken);
     }
+
+    public JwtSecurityToken ValidateToken(string token){
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(secretKey);
+        tokenHandler.ValidateToken(token, new TokenValidationParameters{
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false
+        }, out SecurityToken validatedToken);
+
+        return (JwtSecurityToken) validatedToken;
+    }
 }
