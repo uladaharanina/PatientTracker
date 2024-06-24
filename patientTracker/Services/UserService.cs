@@ -12,17 +12,35 @@ public class UserService : IUserService
 
     public IValidatinService _validationService;
 
-    public UserService(IUserRepo userRepo, IHashingService hashingService, IValidatinService validationService)
+    public JWTService _JWTService;
+
+    public UserService(IUserRepo userRepo, IHashingService hashingService, IValidatinService validationService, JWTService jwtService)
     {
         _userRepo = userRepo;
         _hashingService = hashingService;
         _validationService = validationService;
+        _JWTService = jwtService;
     }
 
     // Authenticate User
-    public async Task<User> Authenticate(string username, string password)
-    {
-       return await _userRepo.AuthenticateUser(username, password);
+    public async Task<string> Authenticate(UserAuthenticationDTO user)
+    {   
+
+        //Check against the database
+        User userData = await _userRepo.GetUserByUsername(user.Username);
+        if(userData!= null){
+            if(_hashingService.VerifyHashedPassword(userData.Password, user.Password)){
+                    //Create a token
+                string token = _JWTService.generateToken(userData);
+                return token;
+            }
+        
+            throw new Exception("Invalid password");
+        }
+        else{
+           throw new Exception("User does not exist");
+
+        }
     }
 
     //Create User

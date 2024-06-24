@@ -28,13 +28,13 @@ public class UserRepo : IUserRepo{
     }
 
     //Authenticate user
-    public async Task<User> AuthenticateUser(string username, string password){
+    public async Task<User> GetUserByUsername(string username){
 
-        var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password ==  password);
+        User user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         if(user!= null){
             return user;
         }
-            return null;
+        return null;
     }
 
     //Update user password

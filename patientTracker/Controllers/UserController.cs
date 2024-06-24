@@ -74,4 +74,23 @@ public class UserController : Controller{
     }
 
     /*AUTHENTICATION AND AUTHROZATION*/
+    [HttpPost]
+    [Route("AuthenticateUser")]
+    public async Task<IActionResult> AuthenticateUser([FromBody] UserAuthenticationDTO user){
+        try{
+
+            //Return a JWT toket
+            var authUser = await _userService.Authenticate(user);
+            if(authUser == null){
+                return Unauthorized();
+            }
+            else{
+                return Ok(authUser);
+            }
+        }
+        catch(Exception ex){
+            return BadRequest(ex.Message);
+        }
+    }
+
 }

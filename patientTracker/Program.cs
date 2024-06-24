@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using patientTracker.Data;
 using patientTracker.Services;
 using patientTracker.Data.Repositories;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration["ConnectionString"];
@@ -11,13 +12,16 @@ builder.Services.AddDbContext<PatientTrackerContext>(options =>
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication("Bearer").AddJwtBearer();
 //Add dependencyes
-
+  builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IValidatinService, ValidateService>();
 builder.Services.AddScoped<IHashingService, HashingService>();
+builder.Services.AddScoped<JWTService>();
+
 
 //Add swagger
 var app = builder.Build();
@@ -27,5 +31,7 @@ app.MapControllers();
     app.UseSwagger();
     app.UseSwaggerUI();
   }
+
+app.UseAuthorization();
 
 app.Run();
