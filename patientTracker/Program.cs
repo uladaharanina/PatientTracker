@@ -9,7 +9,7 @@ var connectionString = builder.Configuration["ConnectionString"];
 builder.Services.AddDbContext<PatientTrackerContext>(options =>
     options.UseSqlServer(connectionString));
 
-
+builder.Services.AddCors();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
@@ -31,6 +31,13 @@ app.MapControllers();
     app.UseSwagger();
     app.UseSwaggerUI();
   }
+
+//Handle CORS
+app.UseCors(options=>options.AllowAnyHeader()
+              .WithOrigins("http://localhost:3000")
+              .AllowAnyMethod()
+              .AllowCredentials()
+              );
 
 app.UseAuthorization();
 

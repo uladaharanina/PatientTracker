@@ -39,7 +39,6 @@ public class UserService : IUserService
         }
         else{
            throw new Exception("User does not exist");
-
         }
     }
 

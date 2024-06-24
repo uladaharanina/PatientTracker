@@ -85,7 +85,8 @@ public class UserController : Controller{
                 return Unauthorized();
             }
             else{
-                return Ok(authUser);
+                Response.Cookies.Append("token", authUser, new CookieOptions{HttpOnly = true});
+                return Ok("Success");
             }
         }
         catch(Exception ex){
