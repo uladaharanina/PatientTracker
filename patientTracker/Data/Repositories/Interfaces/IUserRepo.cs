@@ -14,14 +14,13 @@ public interface IUserRepo{
     //Get user by id
     public Task<User?> GetUserById(int id);
 
-    //Authenticate user
-    public Task<User> AuthenticateUser(string username, string password);
-
+    //Get user by username
+    public Task<User?> GetUserByUsername(string username);
+    
     //Update user password
     public Task<User> UpdateUser(User user);
 
     //Delete user
-    public void DeleteUser(User user);
-
+    public Task Delete(User selectedUser);
 
 }
