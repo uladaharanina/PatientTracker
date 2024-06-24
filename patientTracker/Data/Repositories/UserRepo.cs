@@ -52,10 +52,9 @@ public class UserRepo : IUserRepo{
     }
 
     //Delete user
-    public async void DeleteUser(User user){
-        _context.Users.Remove(user);
+    public async Task Delete(User selectedUser)
+    {
+        _context.Users.Remove(selectedUser);
         await _context.SaveChangesAsync();
     }
-
-
 }

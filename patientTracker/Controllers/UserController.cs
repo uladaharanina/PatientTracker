@@ -19,6 +19,7 @@ public class UserController : Controller{
         GET ALL USERS
     */
     [HttpGet]
+    [Route("ListAllUsers")]
     public async Task<IActionResult>  GetAllUsers(){
         IEnumerable<UserDTO> allUsers =  await _userService.GetAll();
         return Ok(allUsers);
@@ -28,18 +29,18 @@ public class UserController : Controller{
         CREATE A USER
     */
     [HttpPost]
+    [Route("CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createdUserDTO){
         UserDTO user = await _userService.CreateUser(createdUserDTO);
         return Ok("Created User: " + user.Username);
     }
 
-
     /*
         UPDATE USER PASSWORD
     */
     [HttpPatch]
-    [Route("UpdatePassword")]
-    public async Task<IActionResult> UpdateUserPassword(int userId, string newPassword){
+    [Route("UpdatePassword/{userId}")]
+    public async Task<IActionResult> UpdateUserPassword(int userId, [FromBody]string newPassword){
 
         try{
               UserDTO user = await _userService.UpdateUserPassword(userId, newPassword);
@@ -60,7 +61,17 @@ public class UserController : Controller{
     /*
         DELETE USER
     */
-
+    [HttpDelete]
+    [Route("Delete/{userId}")]
+    public async Task<IActionResult> DeleteUser(int userId){
+        try{
+            bool isDeleted = await _userService.Delete(userId);
+            return Ok("User deleted");
+        }
+        catch(Exception ex){
+            return BadRequest(ex.Message);
+        }
+    }
 
     /*AUTHENTICATION AND AUTHROZATION*/
 }

@@ -21,7 +21,6 @@ public interface IUserRepo{
     public Task<User> UpdateUser(User user);
 
     //Delete user
-    public void DeleteUser(User user);
-
+    public Task Delete(User selectedUser);
 
 }

@@ -82,6 +82,19 @@ public class UserService : IUserService
 
     }
 
+    public async Task<bool> Delete(int userId){
+
+        //Get by Id
+        User selectedUser = await _userRepo.GetUserById(userId);
+        if(selectedUser != null)
+        {
+            await _userRepo.Delete(selectedUser);
+            return true;
+        }
+        else{
+            throw new Exception("User does not exist");
+        }
+    }
 
     
 }

@@ -13,7 +13,7 @@ public class ValidateService : IValidatinService{
 
     public bool isCorrectUsername(string username)
     {   string regex = @"!@#$%^&*()_+|~-=`{}[]:""<>?,./;'\\";
-        if(username.Length > 2 & !username.Contains(regex)){
+        if(username.Length > 2 & !Regex.IsMatch(username, regex)){
             return true;
         }
         return false;

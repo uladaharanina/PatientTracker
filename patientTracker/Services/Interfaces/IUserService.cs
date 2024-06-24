@@ -6,6 +6,7 @@ public interface IUserService{
 
     Task<User> Authenticate(string username, string password);
     Task<UserDTO> CreateUser(CreateUserDTO userDTO);
+    Task<bool> Delete(int userId);
     Task<IEnumerable<UserDTO>> GetAll();
     Task<UserDTO> UpdateUserPassword(int userId, string newPassword);
 }
