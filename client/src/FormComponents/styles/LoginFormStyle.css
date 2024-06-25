@@ -1,0 +1,41 @@
+#loginForm{
+    display: block;
+    width:400px;
+    margin: 1em auto;
+    padding: 40px 20px;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.046);
+    border-radius: 20px;
+}
+#loginForm label{
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    text-align: left;
+}
+#loginForm input{
+    display: block;
+    width:80%;
+    padding: 10px 0;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid rgb(23, 90, 117);
+    margin: 5px auto;
+}
+
+#loginForm input:focus{
+    border-bottom: 2px solid rgb(35, 150, 195);
+
+}
+
+.submitBtn{
+    border: none!important;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 2em!important;
+    display: block;
+    font-weight: 500;
+    color: rgb(32, 23, 23);
+    background: rgb(255, 204, 0);
+}
+
