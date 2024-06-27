@@ -17,3 +17,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.errors-login{
+  text-align: center;
+  color: rgb(220, 13, 13);
+}

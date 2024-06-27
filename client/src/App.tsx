@@ -1,14 +1,20 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
-import { LoginForm } from './FormComponents/LoginForm';
 import { Home } from './LayoutComponents/Home';
+import { Dashboard } from './LayoutComponents/Dashboard';
 
 function App() {
   return (
-    <div className="App">
-      <Home></Home>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route path="/dashboard" element={<Dashboard />}></Route>
+
+    </Routes>
+  </BrowserRouter>
+
   );
 }
 
