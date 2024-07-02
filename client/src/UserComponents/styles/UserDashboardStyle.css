@@ -1,0 +1,42 @@
+#admin-layout-container{
+    width:80%;
+    margin: auto;
+    background-color: rgba(225, 235, 231, 0.128);
+    border-radius: 20px;
+    padding: 20px;
+    font-family: Helvetica,  sans-serif;
+}
+
+#admin-layout-container h1{
+    font-size: 1.6em;
+    line-height: 2;
+}
+
+#admin-layout-container h2{
+    line-height: 2;
+    font-size: 1.2em;
+
+}
+
+#admin-layout-container ul{
+    margin: 1em 0;
+}
+
+#admin-layout-container ul li{
+    list-style-type: none;
+    line-height: 1.7;
+    background-color: rgba(196, 242, 255, 0.153);
+    margin: 1em 0;
+    padding: 5px;
+    border-radius: 10px;
+    
+}
+
+.title-container{
+    display: flex;
+    background-color: rgba(204, 196, 255, 0.269);
+}
+
+.title-container li{
+    background-color: transparent!important;
+}

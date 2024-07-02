@@ -1,10 +1,14 @@
+import UserDashboard from "../UserComponents/UserDashboard"
+import { Header } from "./Header"
+
 export const Dashboard = () => {
 
     //Get roleID
 
     return (
         <main>
-            <h1>Dashboard</h1>
+            <Header />
+            <UserDashboard></UserDashboard>
         </main>
     )
 }
