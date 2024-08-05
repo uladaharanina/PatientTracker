@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication("Bearer").AddJwtBearer();
 //Add dependencyes
-  builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IValidatinService, ValidateService>();
