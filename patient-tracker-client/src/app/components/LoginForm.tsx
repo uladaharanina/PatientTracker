@@ -13,7 +13,7 @@ export function LoginForm():React.FC{
     }
 
     return(
-            <form id={LoginFormStyle.loginForm} onSubmit={handleFormSubmission}>
+            <form className={LoginFormStyle.loginForm} onSubmit={handleFormSubmission}>
                 <h2>Login</h2>
                     <label>Username:</label>
                     <input type="text" onChange={(e) => setInputUsername(e.target.value)} required placeholder="Type your username..." value={inputUsername}></input>

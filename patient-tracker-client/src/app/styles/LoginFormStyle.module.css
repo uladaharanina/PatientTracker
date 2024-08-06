@@ -1,4 +1,4 @@
-#loginForm{
+.loginForm{
     background-color: rgb(255, 166, 2);
     width:500px;
     color: white;
@@ -7,20 +7,20 @@
     padding: 20px;
 }
 
-#loginForm h2{
+.loginForm h2{
     margin: 1em 0;
     text-align: center;
 }
 
 
-#loginForm input, 
-#loginForm label{
+.loginForm input, 
+.loginForm label{
     display: block;
     margin: 10px auto;
     width: 200px;
 }
 
-#loginForm input[type="submit"]{
+.loginForm input[type="submit"]{
     width: 100px;
     padding: 10px 20px;
 }

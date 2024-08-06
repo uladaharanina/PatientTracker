@@ -8,6 +8,7 @@ import { LoginForm } from "./components/LoginForm";
 import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
 import UserContext from "./UserContext";
+import RegistrationForm from "./components/RegistrationForm";
 
 
 
@@ -29,7 +30,7 @@ export default function Home() {
       <Header onLogout={handleLogOut} ></Header>
       
       {
-        username === "User" ? <LoginForm></LoginForm> : <Dashboard username={username}></Dashboard>
+        username === "User" ? <LoginForm></LoginForm> : <Dashboard></Dashboard>
       }
     
     </>
