@@ -1,42 +1,38 @@
-import { useState } from 'react';
+'use client';
+import { useState, useContext } from "react";
+import { UserContext } from "../UserContext";
+import { UserData } from "./UserData"
 import HeaderStyle from '../styles/HeaderStyle.module.css';
-import { UserInfo } from './UserInfo';
 
-interface UserInfoData{
-    username: string;
-    onLogout: () => void; // Callback function
-    onLogin: () => void; // Callback function
+interface HeaderProps{
+    onLogout: () => void;
 }
 
-export const Header:React.FC<UserInfoData> = (props) => {
-    
-    const [isUserLogged, setUserLogingStatus] = useState(true);
+export const Header:React.FC<HeaderProps> = (props) => {
 
-    const handleUserStatus: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-        event.preventDefault();
+    const [isUserLogged, setUserLoginStatus] = useState(true);
+
+    const handleUserLoging = () =>{
+
         if(isUserLogged){
+            setUserLoginStatus(false);
             props.onLogout();
-            setUserLogingStatus(false);
+            
         }
-        else{
-            props.onLogin();
-            setUserLogingStatus(true);
-        }
-
-      };
+    }
 
     return(
-        <header>
-            <UserInfo username={props.username}></UserInfo>
-            <nav id={HeaderStyle.nav}>
+        <header id={HeaderStyle.header}>
+            <UserData></UserData>
+            <nav>
                 <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contacts</li>
+                    <li className={HeaderStyle.li}>Home</li>
+                    <li className={HeaderStyle.li}>About</li>
+                    <li className={HeaderStyle.li}>Contacts</li>
                 </ul>
-             
             </nav>
-            <button onClick={handleUserStatus}> {isUserLogged? "Logout": "Login"}</button>
+            
+            <button onClick={handleUserLoging}>{isUserLogged ? "Logout": "Login"}</button>
         </header>
     )
 }

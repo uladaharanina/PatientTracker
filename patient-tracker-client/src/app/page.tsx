@@ -1,38 +1,37 @@
 'use client';
+
 import Image from "next/image";
 import styles from "./page.module.css";
-import { UserInfo } from "./components/UserInfo";
-import {Header} from "./components/Header";
-import { useState } from "react";
-import { Footer } from "./components/Footer";
+import { UserData } from "./components/UserData";
+import { useContext } from "react";
+import { LoginForm } from "./components/LoginForm";
+import { Dashboard } from "./components/Dashboard";
+import { Header } from "./components/Header";
+import UserContext from "./UserContext";
+
 
 
 export default function Home() {
-  const [username, setUsername] = useState("Vlada");
+  const { username, setUsername } = useContext(UserContext);
+
+  //Use Context Hook
+
+//allows functional components to access context values 
+//without having to pass props manually through each level of the component tree. 
 
   const handleLogOut = () => {
     setUsername("User");
   }
 
-  const handleLogIn = () =>{
-    setUsername("Vlada");
-  }
-
   return (
-    <main className={styles.main}>
+    <>
+
+      <Header onLogout={handleLogOut} ></Header>
+      
       {
-      /* Props
-      Pass our data from parent component to child component
-      */
-      } 
-        <Header username={username} onLogout={handleLogOut} onLogin={handleLogIn}></Header>
-        
-        {
-          username == "Vlada" ? <p>User logged in</p>:<p>User logged out</p> 
-        }
-
-
-        <Footer></Footer>
-      </main>
+        username === "User" ? <LoginForm></LoginForm> : <Dashboard username={username}></Dashboard>
+      }
+    
+    </>
   );
 }
