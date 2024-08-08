@@ -1,3 +1,4 @@
+'use client'
 import LoginFormStyle from '../styles/LoginFormStyle.module.css';
 import { useState, useContext } from 'react';
 import UserContext  from '../UserContext';
@@ -21,7 +22,8 @@ export function LoginForm():React.FC{
                     <label>Password:</label>
                     <input type="password" required></input>
 
-                    <input type="submit" value = "Login" />               
+                    <input type="submit" value = "Login" />
+                    <p>Does not have an account? <span>Register Here!</span></p>               
             </form>
     )
 }

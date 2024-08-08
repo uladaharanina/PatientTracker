@@ -9,10 +9,11 @@ import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
 import UserContext from "./UserContext";
 import RegistrationForm from "./components/RegistrationForm";
+import Link from "next/link";
 
 
 
-export default function Home() {
+export default function Home():React.FC {
   const { username, setUsername } = useContext(UserContext);
 
   //Use Context Hook
@@ -28,6 +29,7 @@ export default function Home() {
     <>
 
       <Header onLogout={handleLogOut} ></Header>
+      <Link href="/about">Test</Link>
       
       {
         username === "User" ? <LoginForm></LoginForm> : <Dashboard></Dashboard>
