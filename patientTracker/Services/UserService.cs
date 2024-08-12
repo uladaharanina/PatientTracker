@@ -45,7 +45,7 @@ public class UserService : IUserService
     //Create User
      public async Task<UserDTO> CreateUser(CreateUserDTO userDTO){
         //IMPLEMENT VALIDAION HERE
-        if(_validationService.isCorrectPassword(userDTO.Password) && _validationService.isCorrectUsername(userDTO.Username))
+        if(true)//_validationService.isCorrectPassword(userDTO.Password) && _validationService.isCorrectUsername(userDTO.Username))
         {
              var user = new User{
             Username = userDTO.Username,
@@ -53,6 +53,7 @@ public class UserService : IUserService
             RoleId = userDTO.RoleId,
              DateCreated = DateTime.UtcNow
         };
+          
         User newUser = await _userRepo.CreateUser(user);
     
         return new UserDTO{

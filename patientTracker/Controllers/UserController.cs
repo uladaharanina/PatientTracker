@@ -31,8 +31,14 @@ public class UserController : Controller{
     [HttpPost]
     [Route("CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createdUserDTO){
-        UserDTO user = await _userService.CreateUser(createdUserDTO);
-        return Ok("Created User: " + user.Username);
+        try{
+            UserDTO user = await _userService.CreateUser(createdUserDTO);
+            return Ok("Created User: " + user.Username);
+        }
+        catch(Exception ex){
+            return BadRequest(ex.Message);
+        }
+
     }
 
     /*
@@ -60,7 +66,7 @@ public class UserController : Controller{
 
     /*
         DELETE USER
-    */
+   
     [HttpDelete]
     [Route("Delete/{userId}")]
     public async Task<IActionResult> DeleteUser(int userId){
@@ -72,6 +78,21 @@ public class UserController : Controller{
             return BadRequest(ex.Message);
         }
     }
+     */ 
+
+    // DELETE USER BY USERNAME
+    [HttpDelete]
+    [Route("Delete/{username}")]
+    public async Task<IActionResult> DeleteUser(int id){
+        try{
+            bool isDeleted = await _userService.Delete(id);
+            return Ok("User deleted");
+        }
+        catch(Exception ex){
+            return BadRequest(ex.Message);
+        }
+    }
+
 
     /*AUTHENTICATION AND AUTHROZATION*/
     [HttpPost]

@@ -40,5 +40,6 @@ app.UseCors(options=>options.AllowAnyHeader()
               );
 
 app.UseAuthorization();
+app.MapGet("/", () => "Hello, World!");
 
 app.Run();
